@@ -26,8 +26,9 @@ const addWonder = function () {
 };
 
 const updateVisited = function (wonder) {
+  console.log(wonder);
   $.ajax({
-    url: `wonder/${wonder}`,
+    url: `wonders/${wonder}`,
     method: "PUT",
     success: function (response) {
       console.log("PUT complete");
@@ -36,10 +37,15 @@ const updateVisited = function (wonder) {
   fetch();
 };
 
+$.ajax({
+  url: "/wonder/Colosseum",
+  method: "DELETE",
+  success: function () {},
+});
+
 $("#wonders").on("click", ".visit", function () {
   let wonder = $(this).closest(".wonder").find(".name").text();
-  let wonderName = fullWonder.split("-")[0].trim();
-  updateVisited(wonderName);
+  updateVisited(wonder.split("-")[0].trim());
   //PUT this to the server: update the wonder's `visited` status to `true`
 });
 
